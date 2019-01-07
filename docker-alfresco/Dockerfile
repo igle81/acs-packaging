@@ -21,9 +21,8 @@ COPY ${resource_path}/alfresco-mmt/* /usr/local/tomcat/alfresco-mmt/
 RUN rm -rf /usr/local/tomcat/webapps/ROOT
 COPY ${resource_path}/server-root/* /usr/local/tomcat/webapps
 COPY ${resource_path}/vti-bin/* /usr/local/tomcat/webapps
-RUN mkdir /usr/local/tomcat/alf_data
-RUN mkdir /usr/local/tomcat/alf_data/keystore
-COPY ${resource_path}/alfresco/keystore/* /usr/local/tomcat/alf_data/keystore/
+RUN mkdir /usr/local/tomcat/keystore
+COPY ${resource_path}/alfresco/keystore/* /usr/local/tomcat/keystore/
 
 # Change the value of the shared.loader= property to the following:
 # shared.loader=${catalina.base}/shared/classes
@@ -70,6 +69,8 @@ RUN yum install -y fontconfig-2.13.0-4.3.el7 \
 RUN curl -o /tmp/YourKit-JavaProfiler-2018.04-docker.zip 'https://www.yourkit.com/download/docker/YourKit-JavaProfiler-2018.04-docker.zip' && cd /usr/local && \
     jar xvf /tmp/YourKit-JavaProfiler-2018.04-docker.zip && \
     rm /tmp/YourKit-JavaProfiler-2018.04-docker.zip
+
+RUN sed -i "s/\    <\/Engine>/\n\    <\/Engine>\n\    <Connector\ port=\"8443\"\ URIEncoding=\"UTF-8\"\ protocol=\"org.apache.coyote.http11.Http11Protocol\"\ SSLEnabled=\"true\"\n\               maxThreads=\"150\"\ scheme=\"https\"\ keystoreFile=\"\/usr\/local\/tomcat\/keystore\/ssl.keystore\"\ keystorePass=\"kT9X6oe68t\"\ keystoreType=\"JCEKS\"\n\ secure=\"true\"\ connectionTimeout=\"240000\"\ truststoreFile=\"\/usr\/local\/tomcat\/keystore\/ssl.truststore\"\ truststorePass=\"kT9X6oe68t\"\ truststoreType=\"JCEKS\"\n\               clientAuth=\"want\"\ sslProtocol=\"TLS\"\ allowUnsafeLegacyRenegotiation=\"true\"\ maxHttpHeaderSize=\"32768\"\ maxSavePostSize=\"-1\" \/>/g" /usr/local/tomcat/conf/server.xml
 
 EXPOSE 10001
 
