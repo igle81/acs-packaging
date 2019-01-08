@@ -18,9 +18,9 @@ COPY ${resource_path}/war /usr/local/tomcat/webapps
 COPY ${resource_path}/connector/* /usr/local/tomcat/lib/
 COPY ${resource_path}/alfresco-mmt/* /usr/local/tomcat/alfresco-mmt/
 
-RUN rm -rf /usr/local/tomcat/webapps/ROOT
-COPY ${resource_path}/server-root/* /usr/local/tomcat/webapps
-COPY ${resource_path}/vti-bin/* /usr/local/tomcat/webapps
+#RUN rm -rf /usr/local/tomcat/webapps/ROOT
+#COPY ${resource_path}/server-root/* /usr/local/tomcat/webapps
+#COPY ${resource_path}/vti-bin/* /usr/local/tomcat/webapps
 RUN mkdir /usr/local/tomcat/keystore
 COPY ${resource_path}/alfresco/keystore/* /usr/local/tomcat/keystore/
 
