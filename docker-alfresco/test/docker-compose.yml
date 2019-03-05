@@ -40,6 +40,7 @@ services:
                 -Dshare.host=localhost
                 -Dmessaging.broker.url=\"failover:(tcp://activemq:61616)?timeout=3000&jms.useCompression=true\"
                 -Dlocal.transform.service.enabled=${LOCAL_TRANSFORM_SERVICE_ENABLED}
+                -Dlegacy.local.transform.service.enabled=${LEGACY_LOCAL_TRANSFORM_SERVICE_ENABLED}
                 -Dtransform.service.enabled=${TRANSFORM_SERVICE_ENABLED}
                 "
         ports:

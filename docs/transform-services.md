@@ -23,8 +23,11 @@ for the zip distribution but enabled for docker-compose and helm deployments.
 ```bash
 local.transform.service.enabled=true
 transform.service.enabled=false
+legacy.local.transform.service.enabled=true
 ```
-
+Local Legacy transformers (typically from ACS 6.1 and before) that extend AbstractContentTransformer2
+may also be disabled. By default these are enabled.
+  
 ### When are remote or local transforms used?
 
 Requests made to the V1 REST API for renditions make use of the *RenditionService2*
